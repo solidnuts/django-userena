@@ -178,7 +178,7 @@ class UserenaSignup(models.Model):
         """
         Sends a activation email to the user.
 
-        This email is send when the user wants to activate their newly created
+        This email is send when the admin wants to activate their newly created
         user.
 
         """
@@ -198,6 +198,9 @@ class UserenaSignup(models.Model):
                   message,
                   settings.DEFAULT_FROM_EMAIL,
                   [self.user.email,])
+
+        self.activation_notification_send = True
+        self.save()
 
 class UserenaBaseProfile(models.Model):
     """ Base model needed for extra profile functionality """

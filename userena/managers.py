@@ -21,7 +21,7 @@ PERMISSIONS = {
 class UserenaManager(UserManager):
     """ Extra functionality for the Userena model. """
 
-    def create_inactive_user(self, username, email, password, send_email=True):
+    def create_inactive_user(self, username, email, password, send_email=userena_settings.USERENA_AUTO_ACTIVATE):
         """
         A simple wrapper that creates a new :class:`User`.
 

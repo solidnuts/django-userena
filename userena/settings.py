@@ -6,6 +6,10 @@ from django.conf import settings
 gettext = lambda s: s
 
 
+USERENA_AUTO_ACTIVATE = getattr(settings,
+                                'USERENA_AUTO_ACTIVATE',
+                                True)
+
 USERENA_REDIRECT_ON_SIGNOUT = getattr(settings,
                                       'USERENA_REDIRECT_ON_SIGNOUT',
                                       None)
