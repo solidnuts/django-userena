@@ -21,7 +21,7 @@ PERMISSIONS = {
 class UserenaManager(UserManager):
     """ Extra functionality for the Userena model. """
 
-    def create_inactive_user(self, username, email, password, send_email=userena_settings.USERENA_AUTO_ACTIVATE):
+    def create_inactive_user(self, username, email, password, send_email=userena_settings.USERENA_AUTO_ACTIVATE, profile_context={}):
         """
         A simple wrapper that creates a new :class:`User`.
 
@@ -52,7 +52,7 @@ class UserenaManager(UserManager):
 
         # All users have an empty profile
         profile_model = get_profile_model()
-        new_profile = profile_model(user=new_user)
+        new_profile = profile_model(user=new_user, **profile_context)
         new_profile.save(using=self._db)
 
         # Give permissions to view and change profile
