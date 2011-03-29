@@ -7,6 +7,12 @@ from userena.models import UserenaSignup
 from userena.utils import get_profile_model
 
     
+class UserenaUserProfileInline(admin.StackedInline):
+    model = get_profile_model()
+    verbose_name = "User Profile"
+    can_delete = False
+    max_num = 1
+
 class UserenaSignupInline(admin.StackedInline):
     model = UserenaSignup
     max_num = 1
@@ -20,7 +26,7 @@ class UserenaAdmin(UserAdmin):
     send_activation_email.short_description = \
         "Send activation (approval) emails."
     
-    inlines = [UserenaSignupInline, ]
+    inlines = [UserenaUserProfileInline, UserenaSignupInline, ]
     list_display = ('username', 'email', 'first_name', 'last_name',
                     'is_staff', 'date_joined')
     actions = [ 'send_activation_email', ]
@@ -28,4 +34,4 @@ class UserenaAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, UserenaAdmin)
-admin.site.register(get_profile_model())
+#admin.site.register(get_profile_model())
